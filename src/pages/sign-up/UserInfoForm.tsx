@@ -14,6 +14,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 const UserInfoForm = () => {
+  // const {setIsValid} = blablaCOntext();
+
   const form = useForm<UserInfoTypes>({
     resolver: zodResolver(userInfoFormSchema),
     defaultValues: {
@@ -66,7 +68,7 @@ const UserInfoForm = () => {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input placeholder="Email" {...field} />
+                <Input placeholder="Address" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

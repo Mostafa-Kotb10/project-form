@@ -1,22 +1,18 @@
 import { createContext, useState } from "react";
 
-const RegisterContext = createContext<RegisterFormValueTypes | undefined>(undefined);
-
-interface RegisterFormValueTypes {
-  formData: any;
-  setFormData: (data: any) => void
+interface SignUpContextvalueTypes { 
+  isValid: boolean;
+  setIsValid: (value: boolean) => void;
 }
 
-interface RegisterFormProviderTypes {
-  children: React.ReactNode
-}
+export const SignUpFormContext = createContext<SignUpContextvalueTypes | undefined>(undefined);
 
-export const RegisterFormProvider = ({children}: RegisterFormProviderTypes) => {
-  const {formData, setFormData} = useState({});
+export const SignUpContextProvider = ({children}: {children: React.ReactNode}) => {
+  const [isValid, setIsValid] = useState(false);
 
   return (
-    <RegisterContext.Provider value={{formData, setFormData}}>
+    <SignUpFormContext.Provider value={{isValid, setIsValid}}>
       {children}
-    </RegisterContext.Provider>
+    </SignUpFormContext.Provider>
   )
 };

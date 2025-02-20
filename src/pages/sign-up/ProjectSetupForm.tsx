@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useIsValidated from "@/hooks/useIsValidated";
 
 const ProjectSetupForm = () => {
   const form = useForm<ProjectInfoTypes>({
@@ -23,6 +24,8 @@ const ProjectSetupForm = () => {
       projectDescription: "",
     },
   });
+
+  useIsValidated(form.formState.isValid);
 
   return (
     <Form {...form}>
