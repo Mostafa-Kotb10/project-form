@@ -18,44 +18,42 @@ const SignUpFormCard = () => {
 
   const { isValid } = useSignUpContext();
 
-  console.log(searchParams.get("step"));
-
   const stepParam = searchParams.get("step") || "project-setup";
 
-  const StepComponent = steps.find((c) => c.step === stepParam);
+  const stepComponent = steps.find((c) => c.step === stepParam);
 
-  if (!StepComponent) return null;
+  if (!stepComponent) return null;
 
   const onNext = () => {
-    const nextIdx = StepComponent.id + 1;
+    const nextIdx = stepComponent.id + 1;
 
     setSearchParams({ step: steps[nextIdx].step });
   };
 
   const onPrev = () => {
-    const prevIdx = StepComponent.id - 1;
+    const prevIdx = stepComponent.id - 1;
 
     setSearchParams({ step: steps[prevIdx].step });
   };
-  
+
   return (
     <div className="mx-auto max-w-5xl p-5 h-screen grid place-content-center">
-      <Card className="w-[450px] mx-auto">
+      <Card className="w-[450px] mx-auto max-h-[40rem] overflow-y-scroll">
         <CardHeader className="space-y-2">
           <CardTitle className="font-bold text-2xl">
-            {StepComponent.title}
+            {stepComponent.title}
           </CardTitle>
           <CardDescription className="text-gray-700 font-normal">
-            {StepComponent.descrption}
+            {stepComponent.descrption}
           </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <StepComponent.component />
+          {stepComponent.component ? <stepComponent.component /> : null}
         </CardContent>
 
         <CardFooter>
-          {StepComponent.id < steps.length - 1 ? (
+          {stepComponent.id < steps.length - 1 ? (
             <Button onClick={onNext} disabled={!isValid}>
               Next
             </Button>

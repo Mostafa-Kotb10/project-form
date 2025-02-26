@@ -14,18 +14,27 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useIsValidated from "@/hooks/useIsValidated";
+import useSignUpContext from "@/hooks/useSignUpContext";
+import useSave from "@/hooks/useSave";
 
 const ProjectSetupForm = () => {
+  const {formData} = useSignUpContext();
+
   const form = useForm<ProjectInfoTypes>({
     resolver: zodResolver(projectInfoSchema),
+    mode: "onChange",
     defaultValues: {
-      projectName: "",
-      projectDescription: "",
+      projectName: formData.projectName || "",
+      projectDescription: formData.projectDescription || "",
     },
   });
 
-  useIsValidated(form.formState.isValid);
+  // useIsValidated(form.formState.isValid);
+  
+  useSave({
+    isValid: form.formState.isValid,
+    formData: form.getValues()
+  })
 
   return (
     <Form {...form}>

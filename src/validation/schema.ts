@@ -15,3 +15,22 @@ export const userInfoFormSchema = z.object({
 });
 
 export type UserInfoTypes = z.infer<typeof userInfoFormSchema>;
+
+export const storeSetupFormSchema = z.object({
+  storeName:z.string().regex(/[^0-9]+/, "No numbers allowed"),
+  storeAddress:z.string(),
+  storeNumber:z.string(),
+  storeDescription:z.string(),
+  storeType:z.string(),
+  businessCategory:z.string(),
+  currency :z.string(),
+  paymentMethods :z.string().array(),
+  openingHours :z.string()
+});
+  
+export type StoreSetupFormTypes = z.infer<typeof storeSetupFormSchema>;
+
+
+export type SignUpFormValues = ProjectInfoTypes & UserInfoTypes & StoreSetupFormTypes;
+
+
