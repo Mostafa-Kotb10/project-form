@@ -33,8 +33,7 @@ export const SignUpContextProvider = ({
     storeNumber:"",
     businessCategory:"",
     currency:"",
-    paymentMethods:["visa"],
-    openingHours:""
+    paymentMethods:""
   });
 
   const updateFormData = (data: Partial<SignUpFormValues>) => {

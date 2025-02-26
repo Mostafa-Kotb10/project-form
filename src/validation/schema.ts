@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import {  z } from "zod";
 
 const requiredString = z.string().nonempty({
   message: "This field is required!."
@@ -26,12 +26,11 @@ export const storeSetupFormSchema = z.object({
   storeName: requiredString.regex(/[^0-9]+/, "No numbers allowed"),
   storeAddress: requiredString,
   storeNumber: requiredString,
-  storeDescription: string().optional(),
+  storeDescription: z.string().optional(),
   storeType: requiredString,
   businessCategory: requiredString,
   currency: requiredString,
   paymentMethods: requiredString,
-  openingHours: requiredString,
 });
 
 export type StoreSetupFormTypes = z.infer<typeof storeSetupFormSchema>;

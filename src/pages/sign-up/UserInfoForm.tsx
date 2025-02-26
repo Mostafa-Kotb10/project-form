@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -29,9 +28,7 @@ const UserInfoForm = () => {
     },
   });
 
-  const onSubmit = (data: UserInfoTypes) => {
-    console.log(data);
-  };
+
 
   useSave({
     isValid: form.formState.isValid,
@@ -40,7 +37,7 @@ const UserInfoForm = () => {
 
   return (
     <Form {...form}>
-      <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="space-y-3" >
         <FormField
           name="userName"
           control={form.control}
@@ -114,7 +111,7 @@ const UserInfoForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+    
       </form>
     </Form>
   );

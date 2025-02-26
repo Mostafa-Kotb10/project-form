@@ -53,13 +53,17 @@ const SignUpFormCard = () => {
         </CardContent>
 
         <CardFooter>
-          {stepComponent.id < steps.length - 1 ? (
-            <Button onClick={onNext} disabled={!isValid}>
-              Next
-            </Button>
+          {stepComponent.id === 0 ? (
+            <Button onClick={onNext} disabled={!isValid}>Next</Button>
+          ) : stepComponent.id === steps.length - 1 ? (
+            <div className="flex items-center justify-between w-full">
+              <Button onClick={onPrev}>Previous</Button>
+              <Button disabled={!isValid}>Submit</Button>
+            </div>
           ) : (
             <div className="flex items-center justify-between w-full">
               <Button onClick={onPrev}>Previous</Button>
+              <Button onClick={onNext } disabled={!isValid}>Next</Button>
             </div>
           )}
         </CardFooter>
