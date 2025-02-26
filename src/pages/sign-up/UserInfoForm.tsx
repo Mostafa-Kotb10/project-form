@@ -9,26 +9,34 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import useSave from "@/hooks/useSave";
+import useSignUpContext from "@/hooks/useSignUpContext";
 import { userInfoFormSchema, UserInfoTypes } from "@/validation/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 const UserInfoForm = () => {
-  // const {setIsValid} = blablaCOntext();
+  const { formData} = useSignUpContext();
 
   const form = useForm<UserInfoTypes>({
     resolver: zodResolver(userInfoFormSchema),
+    mode: "onChange",
     defaultValues: {
-      userName: "",
-      userEmail: "",
-      userAddress: "",
-      gender: "",
+      userName: formData.userName || "",
+      userEmail: formData.userEmail || "",
+      userAddress: formData.userAddress || "",
+      gender: formData.gender || "",
     },
   });
 
   const onSubmit = (data: UserInfoTypes) => {
     console.log(data);
   };
+
+  useSave({
+    isValid: form.formState.isValid,
+    formData: form.getValues()
+  })
 
   return (
     <Form {...form}>

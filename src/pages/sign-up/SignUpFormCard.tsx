@@ -37,9 +37,9 @@ const SignUpFormCard = () => {
   };
 
   return (
-    <div className="mx-auto max-w-5xl p-5 h-screen grid place-content-center">
-      <Card className="w-[450px] mx-auto max-h-[40rem] overflow-y-scroll">
-        <CardHeader className="space-y-2">
+    <div className="mx-auto max-w-5xl h-screen grid place-content-center">
+      <Card className="w-[460px] overflow-hidden">
+        <CardHeader className="space-y-2 p-7">
           <CardTitle className="font-bold text-2xl">
             {stepComponent.title}
           </CardTitle>

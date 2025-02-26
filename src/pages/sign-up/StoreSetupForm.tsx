@@ -22,6 +22,7 @@ import { storeSetupFormSchema, StoreSetupFormTypes } from "@/validation/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useSignUpContext from "@/hooks/useSignUpContext";
 import { Textarea } from "@/components/ui/textarea";
+import useSave from "@/hooks/useSave";
 
 const StoreSetupForm = () => {
   const { formData } = useSignUpContext();
@@ -42,144 +43,158 @@ const StoreSetupForm = () => {
     },
   });
 
+  useSave({
+    isValid: form.formState.isValid,
+    formData: form.getValues()
+  })
+
   return (
-    <Form {...form} >
-      <form className="space-y-6">
-        <FormField
-          control={form.control}
-          name="storeName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Store Name</FormLabel>
-              <FormControl>
-                <Input placeholder="name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="storeAddress"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Store Address</FormLabel>
-              <FormControl>
-                <Input placeholder="name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="storeNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Store Number</FormLabel>
-              <FormControl>
-                <Input placeholder="name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="storeDescription"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Store Description</FormLabel>
-              <FormControl>
-                <Textarea placeholder="name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="storeType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Store Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <Form {...form}>
+        <form className="space-y-6 max-h-[17rem] overflow-scroll p-1">
+          <FormField
+            control={form.control}
+            name="storeName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Store Name</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
+                  <Input placeholder="name" {...field} />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="online">online</SelectItem>
-                  <SelectItem value="Retail">Retail</SelectItem>
-                  <SelectItem value="Wholesale">Wholesale</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                You can manage email addresses in your{" "}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="businessCategory"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Business Category</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <FormField
+            control={form.control}
+            name="storeAddress"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Store Address</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
+                  <Input placeholder="name" {...field} />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="Fashion">Fashion</SelectItem>
-                  <SelectItem value="Electronics">Electronics</SelectItem>
-                  <SelectItem value="Groceries">Groceries</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                You can manage email addresses in your{" "}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="currency"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>currency </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <FormField
+            control={form.control}
+            name="storeNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Store Number</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
+                  <Input placeholder="name" {...field} />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="USD">USD</SelectItem>
-                  <SelectItem value="EUR">EUR</SelectItem>
-                  <SelectItem value="EGP">EGP</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                You can manage email addresses in your{" "}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="storeDescription"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Store Description</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="storeType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Store Type</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a verified email to display" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="online">online</SelectItem>
+                    <SelectItem value="Retail">Retail</SelectItem>
+                    <SelectItem value="Wholesale">Wholesale</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  You can manage email addresses in your{" "}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="businessCategory"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Business Category</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a verified email to display" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="fashion">Fashion</SelectItem>
+                    <SelectItem value="electronics">Electronics</SelectItem>
+                    <SelectItem value="groceries">Groceries</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  You can manage email addresses in your{" "}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="currency"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>currency </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a verified email to display" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="USD">USD</SelectItem>
+                    <SelectItem value="EUR">EUR</SelectItem>
+                    <SelectItem value="EGP">EGP</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  You can manage email addresses in your{" "}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
   );
 };
 
